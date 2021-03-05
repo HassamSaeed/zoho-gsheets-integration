@@ -1,0 +1,27 @@
+Goto Flow.zoho.com
+Create a New Flow with webhook.
+Run webhook once to get payload structure.
+Goto logic tab and create new custom function.
+Paste following code.
+Then put this custom function in workflow.
+Then open custom function from workflow to add payload variable. [Select Any Payload variable but remove all child keys for payload to only take parent payload e.g ${webhookTrigger.payload}]
+
+void updateSheet(collection response)
+{
+dataList = response.toJSONList();
+data = dataList.getJSON("data").toJSONList();
+new_data = List();
+for each  row in data
+{
+	new_row = Map();
+	for each  cell in row.keys()
+	{
+		new_row.put(cell,row.getJSON(cell));
+	}
+	new_data.add(new_row);
+}
+// info new_data;
+queryData = Map();
+response = zoho.sheet.createRecords("xxxxxxx","Sheet2",new_data,queryData);
+info response;
+}
