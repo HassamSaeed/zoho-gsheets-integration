@@ -1,0 +1,2 @@
+Replace URL in the formula and paste this in A1 in Google Sheets(this will import first column from zoho) and then copy this formula to the right, which will automatically pickup columns on right.
+=IMPORTXML("https://sheet.zoho.com/sheet/published.do?rid=xxxxxxxxxxxxxxxxxx&mode=print","//*[@id='printDIV-0']/div[1]/div/div/div["&COLUMN(A1)&"]")
